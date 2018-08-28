@@ -1,0 +1,620 @@
+<html lang="zxx" class="no-js gr__dataxlabs_com"><head>
+     <style>
+      
+      #map {
+        position:absolute;
+        top:0;
+        bottom:0;
+        width:100%;
+        margin-top: 90px !important;
+      }
+    </style> 
+    <style>
+        .main-wrapper-first {
+    width: 100% !important;
+    margin: 0 auto;
+    margin-top: auto !important;
+}
+
+
+.main-wrapper {
+    width: 100% !important;
+    margin: 0 auto;
+}
+
+    </style>
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Favicon-->
+	<link rel="shortcut icon" href="img/fav.png">
+	<!-- Author Meta -->
+	<meta name="author" content="CodePixar">
+	<!-- Meta Description -->
+	<meta name="description" content="">
+	<!-- Meta Keyword -->
+	<meta name="keywords" content="">
+	<!-- meta character set -->
+	<meta charset="UTF-8">
+	<!-- Site Title -->
+	<title>AI Decoders</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,500,600" rel="stylesheet">
+		<!--
+		CSS
+		============================================= -->
+		<link rel="stylesheet" href="css/linearicons.css">
+		<link rel="stylesheet" href="css/owl.carousel.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/nice-select.css">
+		<link rel="stylesheet" href="css/magnific-popup.css">
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+	<body data-gr-c-s-loaded="true" cz-shortcut-listen="true">
+	
+
+
+		<header>
+					<div class="container">
+						<div class="header-wrap">
+							<div class="header-top d-flex justify-content-between align-items-center">
+								<div class="logo">
+									<a href="index.html"><h3 class="text-white text-uppercase mb-10" style="
+    margin-top: 10px;
+">AI Decoders </h3></a>
+								</div>
+								<div class="main-menubar d-flex align-items-center">
+								<nav>
+										<a href="livetracking.php">Live Tracking</a>
+										<a href="rla.html">Real time Analytics</a>
+										<a href="ea.html">Exploratory Analytics</a>
+										<a href="team.html">Team</a>
+									</nav>
+									<div class="menu-bar"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</header>
+		  
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+		    <script src="https://cdn.pubnub.com/pubnub.min.js"></script>
+    <script type="text/javascript" src="https://pubnub.github.io/eon/v/eon/1.1.0/eon.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://pubnub.github.io/eon/v/eon/1.1.0/eon.css"/>
+
+  </head>
+  <body>
+    <div id='map'></div>
+   <div style="
+    text-align: right;
+   margin-left: 950px;
+     padding-top: 90px;
+">
+       <table>
+ <tr>
+    <th>Device ID</th>
+    <th>Alarm Type </th>
+   <th>Ward name</th>
+  </tr></table>
+ <div>  <div id="output1"> </div></div>
+
+  
+
+ </div>
+ 
+    <script>
+      var pn = new PubNub({
+        publish_key: 'YOUR_PUBNUB_PUBLISHER_KEY',
+          subscribe_key: 'YOUR_PUBNUB_SUBSCRIBER_KEY'
+      });
+      function getNonZeroRandomNumber(){
+        var random = Math.floor(Math.random()*199) - 99;
+        if(random==0) return getNonZeroRandomNumber();
+        return random;
+      }
+	  
+	 <!--------------------------------------Input channel---------------->
+	        var data;
+            var myvar;
+		    var livetrack = PUBNUB.init({
+          publish_key: 'YOUR_PUBNUB_PUBLISHER_KEY',
+          subscribe_key: 'YOUR_PUBNUB_SUBSCRIBER_KEY'
+        });
+
+	  <!-------------------------End------------------------------------>
+	  
+      var channel = 'pubnub-mapbox-' + getNonZeroRandomNumber();
+      var map = eon.map({
+        pubnub: pn,
+        id: 'map',
+        mbId: 'YOUR_MAPBOX_MAPID',
+        mbToken: 'YOUR_MAPBOX_TOKEN',
+        channels:[channel],
+        connect: connect,
+		  message: function (data) {
+          map.setView(data[2].latlng,10);
+        },
+        marker: function (latlng, data) {
+
+   var marker = new L.marker(latlng, {
+         icon: L.icon({
+        iconUrl: 'https://www.shareicon.net/data/512x512/2016/01/15/703693_gps_512x512.png',
+       iconSize: [49,49 ]
+      })
+        });
+
+
+    return marker;
+
+  }
+        
+      });
+	 <!---------------initialise variables ---------------------->
+	  
+	   myvar = [13.9876747131,77.7393264771];
+	   myvar1 = [13.9717950821,77.6650161743];
+	   myvar2 = [13.9987363815,77.7543716431];
+	   myvar3 = [13.133043,77.613105];
+	   myvar4 = [13.133494,77.612449]; 
+	   myvar5 = [13.133502,77.612323];
+	   myvar6 = [13.133874,77.6118];
+       myvar7 = [13.134044,77.611447];
+	   myvar8 = [ 13.134052,77.610982];
+	   myvar9 = [13.134091,77.610593];
+	   myvar10 = [13.134115,77.610265];
+	   myvar11 = [13.134116,77.610094];
+	   myvar12= [13.134077,77.609725];
+	   myvar13= [13.13409,78.4867];
+	   myvar14 = [13.134096 ,77.607853];
+	   myvar15 = [13.134097 ,77.607656];
+	   myvar16 = [ 13.134108 ,77.606533];
+	   myvar17 = [13.134116,77.605749];
+	   myvar18 = [ 13.13412,77.605632];
+	   myvar19 = [ 13.135412,77.606632];
+	   myvar20 = [ 13.635412,78.5867];
+	   myvar21 = [13.835412 ,78.6867];
+	   myvar22 = [13.134116,77.610094];
+       myvar23 = [13.610094,77.710094];
+       myvar24 = [13.3850 ,77.4867];
+       myvar25 = [13.43850 ,77.14867];	   
+	      
+	   <!--------------- END ---------------------->
+	   
+      function connect() {
+	
+        var me = {
+          icon: {
+            'marker-color': '#ce1126'
+          }
+        };
+        var them = {
+          icon: {
+            'marker-color': '#29abe2'
+          }
+        };
+     var torchys = [
+          {
+            latlng: [ myvar[0],myvar[1]]
+          },
+		  {
+            latlng: [ myvar1[0],myvar1[1]]
+          },
+		  {
+            latlng: [ myvar2[0],myvar2[1]]
+          },
+		  {
+            latlng: [ myvar3[0],myvar3[1]]
+          },
+		  {
+            latlng: [ myvar4[0],myvar4[1]]
+          },{
+            latlng: [ myvar5[0],myvar5[1]]
+          },{
+            latlng: [ myvar6[0],myvar6[1]]
+          },{
+            latlng: [ myvar7[0],myvar7[1]]
+          },{
+            latlng: [ myvar8[0],myvar8[1]]
+          },{
+            latlng: [ myvar9[0],myvar9[1]]
+          },{
+            latlng: [ myvar10[0],myvar10[1]]
+          },{
+            latlng: [ myvar11[0],myvar11[1]]
+          },{
+            latlng: [ myvar12[0],myvar12[1]]
+          },{
+            latlng: [ myvar13[0],myvar13[1]]
+          },{
+            latlng: [ myvar14[0],myvar14[1]]
+          },{
+            latlng: [ myvar15[0],myvar15[1]]
+          },{
+            latlng: [ myvar16[0],myvar1[1]]
+          },{
+            latlng: [ myvar17[0],myvar17[1]]
+          },{
+            latlng: [ myvar18[0],myvar18[1]]
+          },{
+            latlng: [ myvar19[0],myvar19[1]]
+          },{
+            latlng: [ myvar20[0],myvar20[1]]
+          },{
+            latlng: [ myvar21[0],myvar21[1]]
+          },{
+            latlng: [ myvar22[0],myvar22[1]]
+          },{
+            latlng: [ myvar23[0],myvar23[1]]
+          },{
+            latlng: [ myvar24[0],myvar24[1]]
+          },{
+            latlng: [ myvar25[0],myvar25[1]]
+          }
+          
+        ];	 
+		 
+		 
+        setInterval(function(){
+			
+          var new_torchys = JSON.parse(JSON.stringify(torchys));
+		  
+		   	  
+		   livetrack.subscribe({
+          channel: 'livetracking',
+          message: function(m){
+			 
+						   if(m["deviceCode"] == null){
+                			   myvar = [m["location_latitude"],m["location_longitude"]];
+
+			   }
+			 else if(m["deviceCode"]== 864504031502210){
+                			   myvar = [m["location_latitude"],m["location_longitude"]]
+		
+
+			  }
+			  else if(m["deviceCode"]==863977033888558){
+                			   myvar1 = [m["location_latitude"],m["location_longitude"]];
+		
+			  }
+			  else if(m["deviceCode"]==863977033764239){
+                			   myvar2 = [m["location_latitude"],m["location_longitude"]];
+							   
+			  }
+			  else if(m["deviceCode"]==864504031205202){
+                			   myvar3 = [m["location_latitude"],m["location_longitude"]];
+							 
+			  }
+			   else if(m["deviceCode"]==864504031234988){
+                			   myvar4 = [m["location_latitude"],m["location_longitude"]];
+							   
+			  }
+			    else if(m["deviceCode"]==863977033713764){
+                			   myvar5 = [m["location_latitude"],m["location_longitude"]];
+							   
+			  }
+			else  if(m["deviceCode"]==864504031260694){
+                			   myvar6 = [m["location_latitude"],m["location_longitude"]];
+							   
+			  }
+			else   if(m["deviceCode"]==863977033907911){
+                			   myvar7 = [m["location_latitude"],m["location_longitude"]];
+							   
+			  }
+			 else  if(m["deviceCode"]==863977033766374){
+                			   myvar8 = [m["location_latitude"],m["location_longitude"]];
+							   
+			  }
+			  else if(m["deviceCode"]==864504031782226){
+                			   myvar9 = [m["location_latitude"],m["location_longitude"]];
+							   
+			  }
+			  else if(m["deviceCode"]==862010039078304){
+                			   myvar10 = [m["location_latitude"],m["location_longitude"]];
+							   
+			  }
+			  else if(m["deviceCode"]==863977033703997){
+                			   myvar11 = [m["location_latitude"],m["location_longitude"]];
+							  
+			  }
+			   else if(m["deviceCode"]==863977033802534){
+                			   myvar12 = [m["location_latitude"],m["location_longitude"]];
+							  
+			  }
+			   else if(m["deviceCode"]==864504031819929){
+                			   myvar13 = [m["location_latitude"],m["location_longitude"]];
+							  
+			  }
+			else   if(m["deviceCode"]==864504031235647){
+                			   myvar14 = [m["location_latitude"],m["location_longitude"]];
+							  
+			  }
+			 else  if(m["deviceCode"]==864504031432707){
+                			   myvar15 = [m["location_latitude"],m["location_longitude"]];
+							  
+			  }
+			 else  if(m["deviceCode"]==863977033715231){
+                			   myvar16 = [m["location_latitude"],m["location_longitude"]];
+							  
+			  }
+			else   if(m["deviceCode"]==864504031218007){
+                			   myvar17 = [m["location_latitude"],m["location_longitude"]];
+							  
+			  }
+			 else  if(m["deviceCode"]==863977033612396){
+                			   myvar18 = [m["location_latitude"],m["location_longitude"]];
+							  
+			  }
+			 else  if(m["deviceCode"]==863977033828794){
+                			   myvar19 = [m["location_latitude"],m["location_longitude"]];
+							  
+			  }
+			 else  if(m["deviceCode"]==863977033827523){
+                			   myvar20 = [m["location_latitude"],m["location_longitude"]];
+							  
+			  }
+			 else   if(m["deviceCode"]==864504031035658){
+                			   myvar21 = [m["location_latitude"],m["location_longitude"]];
+							   
+			  }
+			 else   if(m["deviceCode"]==863977033835484){
+                			   myvar22 = [m["location_latitude"],m["location_longitude"]];
+							  
+			  }
+			else    if(m["deviceCode"]==863977033895017){
+                			   myvar23 = [m["location_latitude"],m["location_longitude"]];
+							  
+			  }
+			else    if(m["deviceCode"]==863977033828919){
+                			   myvar24 = [m["location_latitude"],m["location_longitude"]];
+							  
+			  } 
+			else  if(m["deviceCode"]==863083037582683){
+                			   myvar25 = [m["location_latitude"],m["location_longitude"]];
+							  
+			  }
+			
+			
+			
+			
+			}
+        });
+		  
+		
+            new_torchys[0] = {
+              marker: new_torchys[0].marker,
+              latlng: [
+                 myvar[0],myvar[1]
+              ]
+            }
+			
+           new_torchys[1] = {
+              marker: new_torchys[1].marker,
+              latlng: [
+                 myvar1[0],myvar1[1]
+              ]
+            }
+			new_torchys[2] = {
+              marker: new_torchys[2].marker,
+              latlng: [
+                 myvar2[0],myvar2[1]
+              ]
+            }
+             new_torchys[3] = {
+              marker: new_torchys[3].marker,
+              latlng: [
+                myvar3[0],myvar3[1]
+              ]
+            }
+             new_torchys[4] = {
+              marker: new_torchys[4].marker,
+              latlng: [
+                myvar4[0],myvar4[1]
+              ]
+            }
+              new_torchys[5] = {
+              marker: new_torchys[5].marker,
+              latlng: [
+                myvar5[0],myvar5[1]
+              ]
+            }
+             new_torchys[6] = {
+              marker: new_torchys[6].marker,
+              latlng: [
+                myvar6[0],myvar6[1]
+              ]
+            }
+              new_torchys[7] = {
+              marker: new_torchys[7].marker,
+              latlng: [
+                myvar7[0],myvar7[1]
+              ]
+            }
+             new_torchys[8] = {
+              marker: new_torchys[8].marker,
+              latlng: [
+                myvar8[0],myvar8[1]
+              ]
+            }
+              new_torchys[9] = {
+              marker: new_torchys[9].marker,
+              latlng: [
+                myvar9[0],myvar9[1]
+              ]
+            }
+             new_torchys[10] = {
+              marker: new_torchys[10].marker,
+              latlng: [
+                myvar10[0],myvar10[1]
+              ]
+            }
+             new_torchys[11] = {
+              marker: new_torchys[11].marker,
+              latlng: [
+                myvar11[0],myvar11[1]
+              ]
+            }
+            new_torchys[12] = {
+              marker: new_torchys[12].marker,
+              latlng: [
+                myvar12[0],myvar12[1]
+              ]
+            }
+              new_torchys[13] = {
+              marker: new_torchys[13].marker,
+              latlng: [
+                myvar13[0],myvar13[1]
+              ]
+            }
+			 new_torchys[14] = {
+              marker: new_torchys[14].marker,
+              latlng: [
+                myvar14[0],myvar14[1]
+              ]
+            }
+             new_torchys[15] = {
+              marker: new_torchys[15].marker,
+              latlng: [
+                myvar15[0],myvar15[1]
+              ]
+            }
+            new_torchys[16] = {
+              marker: new_torchys[16].marker,
+              latlng: [
+                myvar16[0],myvar16[1]
+              ]
+            }
+            new_torchys[17] = {
+              marker: new_torchys[17].marker,
+              latlng: [
+                myvar17[0],myvar17[1]
+              ]
+            }
+             new_torchys[18] = {
+              marker: new_torchys[18].marker,
+              latlng: [
+                myvar18[0],myvar18[1]
+              ]
+            }
+             new_torchys[19] = {
+              marker: new_torchys[19].marker,
+              latlng: [
+                myvar19[0],myvar19[1]
+              ]
+            }
+            new_torchys[20] = {
+              marker: new_torchys[20].marker,
+              latlng: [
+                myvar20[0],myvar20[1]
+              ]
+            }
+             new_torchys[21] = {
+              marker: new_torchys[21].marker,
+              latlng: [
+                myvar21[0],myvar21[1]
+              ]
+            }
+              new_torchys[22] = {
+              marker: new_torchys[22].marker,
+              latlng: [
+                myvar22[0],myvar22[1]
+              ]
+            }
+             new_torchys[23] = {
+              marker: new_torchys[23].marker,
+              latlng: [
+                myvar23[0],myvar23[1]
+              ]
+            }
+             new_torchys[24] = {
+              marker: new_torchys[24].marker,
+              latlng: [
+                myvar24[0],myvar24[1]
+              ]
+            }
+             new_torchys[25] = {
+              marker: new_torchys[25].marker,
+              latlng: [
+                myvar25[0],myvar25[1]
+              ]
+            }
+            
+
+			
+		
+         
+          pn.publish({
+            channel: channel,
+            message: new_torchys
+          });
+        }, 1000);
+      };
+    </script>
+<script charset="utf-8">
+      (function(){
+    
+        var livetrack = PUBNUB.init({
+           publish_key: 'YOUR_PUBNUB_PUBLISHER_KEY',
+          subscribe_key: 'YOUR_PUBNUB_SUBSCRIBER_KEY',
+          ssl : (('https:' == document.location.protocol) ? true : false) });
+       
+        livetrack.subscribe({
+          channel: 'livetracking',
+          message: function(m){
+			 
+			 setTimeout(function(){
+				 $('#output1').append("<tr><td>" + m["deviceCode"] + "</td><td>" + m["pyld_alarmType"] +"</td><td>"+ m["location_wardName"] +"</td></tr>");
+
+			 
+			 }, 1000);
+              
+			},
+          connect : publish
+        });
+        
+        function publish() {
+          livetrack.publish({
+            channel: 'livetracking',
+            message:{deviceCode: 864504031502210, location_latitude: 12.9875059128, location_longitude: 77.7405853271, location_wardName: "other", pyld_alarmType: "HMW"},
+
+
+          });
+        }
+        
+      })();
+    </script>
+	 <style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+   
+    width: 96%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    color:white;
+}
+ #map {
+        position:absolute;
+        top:0;
+        bottom:0;
+        width:70%;
+      }
+
+</style>
+
+ <script type="text/javascript">
+var auto_refresh = setInterval(
+function ()
+{
+   $('#output1').load(document.URL +  ' #output1');
+
+}, 10000); 
+</script>
+
+</body>
+
+
